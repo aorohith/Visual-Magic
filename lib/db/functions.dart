@@ -29,16 +29,16 @@ onSuccess(List<String> data) {
 }
 
 //first called from splash screen
-Future splashFetch() async {
-  if (await _requestPermission(Permission.storage)) {
-    // final videoDB = await Hive.openBox<VideoModel>('video_db');
-    SearchFilesInStorage.searchInStorage([
-      '.mp4',
-      '.mkv',
-    ], onSuccess, (p0) {});
-  } else {
-    log("Error");
-  }
+Future<void> splashFetch() async {
+  // if (await _requestPermission(Permission.storage)) {
+  //   // final videoDB = await Hive.openBox<VideoModel>('video_db');
+  //   SearchFilesInStorage.searchInStorage([
+  //     '.mp4',
+  //     '.mkv',
+  //   ], onSuccess, (p0) {});
+  // } else {
+  //   log("Error");
+  // }
 }
 
 //request for the permission
@@ -56,7 +56,7 @@ Future<bool> _requestPermission(Permission permission) async {
 }
 
 //load all folders list also called when the app starting time only
-Future loadFolderList() async {
+Future<void> loadFolderList() async {
   fetchedFolders.value.clear();
   for (String path in fetchedVideosPath) {
     temp.add(path.substring(
@@ -67,7 +67,7 @@ Future loadFolderList() async {
 }
 
 //Load Folder videos
-getFolderVideos(String path) {
+void getFolderVideos(String path) {
   filteredFolderVideos.value.clear(); //all video list inside the folder
   List<String> matchedVideoPath = []; //videos starting with the folder name
   List<String> splittedMatchedVideoPath =
@@ -95,12 +95,12 @@ getFolderVideos(String path) {
 }
 
 //video info collection
-Future getVideoWithInfo() async {
+Future<void> getVideoWithInfo() async {
   final videoDB =
       await Hive.openBox<VideoModel>('video_db'); //you have to clear hive
   fetchedVideosWithInfo.value.clear();
   for (int i = 0; i < fetchedVideosPath.length; i++) {
-    var info = await videoInfo.getVideoInfo(fetchedVideosPath[i]);
+    VideoData? info = await videoInfo.getVideoInfo(fetchedVideosPath[i]);
     final videoModel = VideoModel(
       title: info!.title!,
       path: info.path!,
@@ -149,7 +149,7 @@ sortByDate() {
 }
 
 Future<void> getFromDB() async {
-  final videoDB = await Hive.openBox<VideoModel>('video_db');
+  final Box<VideoModel> videoDB = await Hive.openBox<VideoModel>('video_db');
   fetchedVideosWithInfo.value.addAll(videoDB.values);
   for (VideoModel obj in fetchedVideosWithInfo.value) {
     temp.add(obj.path.substring(0, obj.path.lastIndexOf('/')));
@@ -159,7 +159,7 @@ Future<void> getFromDB() async {
   fetchedFolders.value = temp.toSet().toList();
 }
 
-saveUserData(UserModel value) async {
+Future<void> saveUserData(UserModel value) async {
   log(value.toString());
   var userDB = await Hive.openBox<UserModel>('user_db');
   // userDB.put('key1', value);
@@ -168,9 +168,9 @@ saveUserData(UserModel value) async {
   log(userDB.get("key1").toString());
 }
 
-getData() async {
-  final userDB = await Hive.openBox<UserModel>('user_db');
+Future<List<UserModel>> getData() async {
+  final Box<UserModel> userDB = await Hive.openBox<UserModel>('user_db');
   // print(userDB.get('user'),);
   log(userDB.length.toString());
-  return userDB.values;
+  return userDB.values.toList();
 }
