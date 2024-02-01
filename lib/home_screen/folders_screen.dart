@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -19,30 +20,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // _fetchedFolders = getFolderList();
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    double _w = MediaQuery.of(context).size.width;
+    double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: MenuDrawer(),
-      floatingActionButton: PlayButton(context),
+      drawer: const MenuDrawer(),
+      floatingActionButton: playButton(context),
       backgroundColor: const Color(0xff060625),
       appBar: AppBar(
         title: const Text("Folders"),
         actions: [
           ElevatedButton(
             onPressed: () async {
-              print("Button Clicked");
-              print(filteredFolderVideos.value.length);
+              log("Button Clicked");
+              log(filteredFolderVideos.value.length.toString());
               // final videoDB = await Hive.openBox<VideoModel>('video_db');
               // print(videoDB.values.length);
             },
             child: const Text("Hai"),
           ),
-          Search(), //Search Refactor
+         const Search(), //Search Refactor
           IconButton(
             onPressed: () {
               ShowCaseWidget.of(context).startShowCase([
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             builder:
                 (BuildContext ctx, List<String> updatedFolders, Widget? child) {
               return ListView.builder(
-                padding: EdgeInsets.all(_w / 30),
+                padding: EdgeInsets.all(w / 30),
                 physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
                 itemCount: updatedFolders.length,
@@ -78,8 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         duration: const Duration(milliseconds: 1500),
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: Container(
-                          margin: EdgeInsets.only(bottom: _w / 20),
-                          height: _w / 4,
+                          margin: EdgeInsets.only(bottom: w / 20),
+                          height: w / 4,
                           decoration: BoxDecoration(
                             color: const Color(0xff1f1f55),
                             borderRadius: const BorderRadius.all(

@@ -5,59 +5,59 @@ part 'video_model.g.dart';
 
 @HiveType(typeId: 1)
 class VideoModel {
-
   @HiveField(0)
-  final title;
+  final String title;
 
   @HiveField(1)
-  final path;
+  final String path;
 
   @HiveField(2)
-  final height;
+  final double height;
 
   @HiveField(3)
-  final width;
+  final double width;
 
   @HiveField(4)
-  final filesize;
+  final double fileSize;
 
   @HiveField(5)
-  final duration;
+  final double duration;
 
   @HiveField(6)
-  final date;
+  final DateTime date;
 
   @HiveField(7)
-  static final folderPaths=[];
+  static final folderPaths = [];
 
   @HiveField(8)
-  final isFavourite;
+  final bool isFavorite;
 
   VideoModel({
     required this.title,
     required this.path,
     required this.height,
     required this.width,
-    required this.filesize,
+    required this.fileSize,
     required this.duration,
     required this.date,
-    
-    required this.isFavourite,
-  }
-  );
+    required this.isFavorite,
+  });
 }
 
 @HiveType(typeId: 2)
-class UserModel{
-
+class UserModel {
   @HiveField(0)
-  final name;
+  final String name;
 
   @HiveField(1)
-  final email;
+  final String email;
 
   @HiveField(2)
-  final image;
+  final File? image;
 
-  UserModel({required this.name, required this.email, required this.image});
+  UserModel({
+    required this.name,
+    required this.email,
+    required this.image,
+  });
 }

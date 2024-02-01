@@ -11,12 +11,12 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: MenuDrawer(),
-      floatingActionButton: PlayButton(context),
+      drawer: const MenuDrawer(),
+      floatingActionButton: playButton(context),
       backgroundColor: const Color(0xff060625),
       appBar: AppBar(
         title: const Text("Favorites"),
-        actions: [
+        actions: const[
           Search(),
         ],
         backgroundColor: const Color(0xff2C2C6D),
@@ -75,8 +75,8 @@ class FavoritesScreen extends StatelessWidget {
                               context: context,
                               builder: (ctx) {
                                 return AlertDialog(
-                                  backgroundColor: const Color(0xf060625),
-                                  content: favouritePopup(),
+                                  backgroundColor: const Color(0xff060625),
+                                  content: favoritePopup(),
                                 );
                               });
                             },

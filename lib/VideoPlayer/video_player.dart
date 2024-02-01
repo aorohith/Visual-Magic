@@ -1,10 +1,9 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 
 class VideoPlay extends StatefulWidget {
-  final videoLink;
+  final String videoLink;
   const VideoPlay({Key? key, this.videoLink = "/storage/emulated/0/flutter/file.mp4" }) : super(key: key);
 
   @override
@@ -18,13 +17,13 @@ class _VideoPlayState extends State<VideoPlay> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Example player"),
+        title: const Text("Example player"),
       ),
       body: AspectRatio(
             aspectRatio: 16 / 9,
             child: BetterPlayer.file(
-              "${widget.videoLink}",
-              betterPlayerConfiguration: BetterPlayerConfiguration(
+              widget.videoLink,
+              betterPlayerConfiguration: const BetterPlayerConfiguration(
                 autoDetectFullscreenDeviceOrientation: true, 
                 allowedScreenSleep:false,
                 fit : BoxFit.fill,

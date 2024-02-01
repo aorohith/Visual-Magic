@@ -16,17 +16,11 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: SafeArea(
-          child: Container(
+          child: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Stack(children: [
@@ -45,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
               return ShowCaseWidget(
                 builder: Builder(
-                  builder: (context) => BottomNavbar(),
+                  builder: (context) => const BottomNavbar(),
                 ),
               );
             },

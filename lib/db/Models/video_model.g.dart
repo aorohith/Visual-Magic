@@ -21,10 +21,10 @@ class VideoModelAdapter extends TypeAdapter<VideoModel> {
       path: fields[1] as dynamic,
       height: fields[2] as dynamic,
       width: fields[3] as dynamic,
-      filesize: fields[4] as dynamic,
+      fileSize: fields[4] as dynamic,
       duration: fields[5] as dynamic,
       date: fields[6] as dynamic,
-      isFavourite: fields[8] as dynamic,
+      isFavorite: fields[8] as dynamic,
     );
   }
 
@@ -41,7 +41,7 @@ class VideoModelAdapter extends TypeAdapter<VideoModel> {
       ..writeByte(3)
       ..write(obj.width)
       ..writeByte(4)
-      ..write(obj.filesize)
+      ..write(obj.fileSize)
       ..writeByte(5)
       ..write(obj.duration)
       ..writeByte(6)
@@ -49,7 +49,7 @@ class VideoModelAdapter extends TypeAdapter<VideoModel> {
       ..writeByte(7)
       ..write(VideoModel.folderPaths)
       ..writeByte(8)
-      ..write(obj.isFavourite);
+      ..write(obj.isFavorite);
   }
 
   @override

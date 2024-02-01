@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_video_info/flutter_video_info.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -5,10 +7,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:visual_magic/fetch_files/search_files.dart';
 import 'package:visual_magic/db/Models/video_model.dart';
 
-final videoInfo = FlutterVideoInfo(); //creating object of infoclass
+final videoInfo = FlutterVideoInfo(); //creating object of info class
 List<String> fetchedVideosPath = []; //all videos path loaded first time
 ValueNotifier<List<String>> fetchedFolders = ValueNotifier([]); //folder list
-List<String> temp = []; //temp directory for folder funcion
+List<String> temp = []; //temp directory for folder function
 ValueNotifier<List> fetchedVideosWithInfo =
     ValueNotifier([]); //videos with info
 ValueNotifier<List> filteredFolderVideos =
@@ -35,7 +37,7 @@ Future splashFetch() async {
       '.mkv',
     ], onSuccess, (p0) {});
   } else {
-    print("Error");
+    log("Error");
   }
 }
 
@@ -59,7 +61,6 @@ Future loadFolderList() async {
   for (String path in fetchedVideosPath) {
     temp.add(path.substring(
         0, path.lastIndexOf('/'))); //removed video name and add to temp
-
   }
 
   fetchedFolders.value = temp.toSet().toList();
@@ -67,18 +68,20 @@ Future loadFolderList() async {
 
 //Load Folder videos
 getFolderVideos(String path) {
-  filteredFolderVideos.value.clear();//all video list inside the folder
-  List<String> matchedVideoPath = [];//videos starting with the folder name
-  List<String> splittedMatchedVideoPath = []; // solit the path wich is mached with folder
+  filteredFolderVideos.value.clear(); //all video list inside the folder
+  List<String> matchedVideoPath = []; //videos starting with the folder name
+  List<String> splittedMatchedVideoPath =
+      []; // so the path which is matched with folder
 
   var splitted = path.split('/');
 
   for (dynamic singlePath in fetchedVideosWithInfo.value) {
     if (singlePath.path.startsWith(path)) {
-      matchedVideoPath.add(singlePath.path);//find the foder matched video path
+      matchedVideoPath
+          .add(singlePath.path); //find the folder matched video path
     }
   }
-  print(fetchedVideosPath.length);
+  log(fetchedVideosPath.length.toString());
 
   for (String newPath in matchedVideoPath) {
     splittedMatchedVideoPath = newPath.split('/');
@@ -93,19 +96,20 @@ getFolderVideos(String path) {
 
 //video info collection
 Future getVideoWithInfo() async {
-  final videoDB = await Hive.openBox<VideoModel>('video_db');//you have to clear hive 
+  final videoDB =
+      await Hive.openBox<VideoModel>('video_db'); //you have to clear hive
   fetchedVideosWithInfo.value.clear();
   for (int i = 0; i < fetchedVideosPath.length; i++) {
     var info = await videoInfo.getVideoInfo(fetchedVideosPath[i]);
     final videoModel = VideoModel(
-      title: info!.title,
-      path: info.path,
-      height: info.height,
-      width: info.width,
-      filesize: info.filesize,
-      duration: info.duration,
-      date: info.date,
-      isFavourite: false,
+      title: info!.title!,
+      path: info.path!,
+      height: info.height!.toDouble(),
+      width: info.width!.toDouble(),
+      fileSize: info.fileSize ?? 0.0,
+      duration: info.duration ?? 0.0,
+      date: info.date ?? DateTime.now(),
+      isFavorite: false,
     );
     videoDB.add(videoModel);
 
@@ -132,7 +136,7 @@ sortByDuration() {
 
 sortBySize() {
   fetchedVideosWithInfo.value.sort((a, b) {
-    return a.filesize.compareTo(b.filesize);
+    return a.fileSize.compareTo(b.fileSize);
   });
   // fetchedVideosWithInfo.notifyListeners();
 }
@@ -149,27 +153,24 @@ Future<void> getFromDB() async {
   fetchedVideosWithInfo.value.addAll(videoDB.values);
   for (VideoModel obj in fetchedVideosWithInfo.value) {
     temp.add(obj.path.substring(0, obj.path.lastIndexOf('/')));
-    
-    print(fetchedVideosWithInfo.value.length);
+
+    log(fetchedVideosWithInfo.value.length.toString());
   }
   fetchedFolders.value = temp.toSet().toList();
 }
 
-
-saveUserData(UserModel value) async{
-  print(value);
+saveUserData(UserModel value) async {
+  log(value.toString());
   var userDB = await Hive.openBox<UserModel>('user_db');
   // userDB.put('key1', value);
   userDB.add(value);
   // print(userDB.length);
-  print(userDB.get("key1"));
+  log(userDB.get("key1").toString());
 }
 
-getData() async{
+getData() async {
   final userDB = await Hive.openBox<UserModel>('user_db');
   // print(userDB.get('user'),);
-  print(userDB.length);
-  return userDB.values ; 
-  
-
+  log(userDB.length.toString());
+  return userDB.values;
 }

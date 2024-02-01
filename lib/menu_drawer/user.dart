@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,11 +7,14 @@ import 'package:visual_magic/db/Models/video_model.dart';
 import 'package:visual_magic/db/functions.dart';
 
 class UserScreen extends StatefulWidget {
-  final name;
-  final assetImage;
+  final String name;
+  final String assetImage;
 
-  UserScreen({Key? key, required this.assetImage, required this.name})
-      : super(key: key);
+  const UserScreen({
+    Key? key,
+    required this.assetImage,
+    required this.name,
+  }) : super(key: key);
 
   @override
   State<UserScreen> createState() => _UserScreenState();
@@ -18,14 +22,13 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   File? image;
-  var imagePath;
+  String? imagePath;
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
 
-@override
+  @override
   void initState() {
     getData();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -40,15 +43,15 @@ class _UserScreenState extends State<UserScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              print(image);
+              log(image.toString());
               final value = UserModel(
                 name: _nameController.text,
                 email: _emailController.text,
-                image: image.toString,
+                image: image,
               );
               saveUserData(value);
             },
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
           )
         ],
       ),
@@ -60,11 +63,11 @@ class _UserScreenState extends State<UserScreen> {
               borderRadius: BorderRadius.circular(100),
               child: image != null
                   ? Image.file(
-                      File(imagePath),
+                      File(imagePath ?? ""),
                       width: 160,
                       height: 160,
                     )
-                  : FlutterLogo(
+                  : const FlutterLogo(
                       size: 160,
                     ),
             ),
@@ -74,23 +77,23 @@ class _UserScreenState extends State<UserScreen> {
               onPressed: () {
                 imagePick();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
                 color: Colors.white,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextFormField(
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: const InputDecoration(border: OutlineInputBorder()),
               controller: _nameController,
             ),
             TextFormField(
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: const InputDecoration(border: OutlineInputBorder()),
               controller: _emailController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ]),
@@ -98,16 +101,16 @@ class _UserScreenState extends State<UserScreen> {
       ),
     );
   }
+
   Future<void> imagePick() async {
     final temps = await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() async{
-      
-      this.imagePath = temps!.path;
+    setState(() async {
+      imagePath = temps!.path;
     });
   }
 
-  getDataPressed(){
+  getDataPressed() {
     var values = getData();
-    print(values);
+    log(values);
   }
 }

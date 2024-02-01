@@ -11,13 +11,13 @@ import 'package:visual_magic/VideoPlayer/video_player.dart';
 
 //#################...Floating Video play Button..#############
 
-Widget PlayButton(context) {
+Widget playButton(context) {
   return FloatingActionButton(
     onPressed: () {},
     child: IconButton(
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const VideoPlay()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const VideoPlay()));
       },
       icon: const Icon(Icons.play_arrow, size: 30, color: Colors.white),
     ),
@@ -27,7 +27,7 @@ Widget PlayButton(context) {
 //##################...Search Refactoring...####################
 
 class Search extends StatefulWidget {
-  Search({Key? key}) : super(key: key);
+  const Search({Key? key}) : super(key: key);
 
   @override
   State<Search> createState() => _SearchState();
@@ -49,6 +49,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
     // );
   }
 
+  @override
   Widget build(BuildContext context) {
     TextEditingController textController = TextEditingController();
     return Showcase(
@@ -76,8 +77,9 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
   }
 }
 
-//###################...Favourites button Refactoring...########################
+//###################...Favorites button Refactoring...########################
 
+// ignore: must_be_immutable
 class Favorites extends StatefulWidget {
   bool isHighlighted = true;
   bool isPressed = true;
@@ -153,7 +155,7 @@ Widget optionPopup() {
           width: 200,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xff1F1F55),
+              backgroundColor: const Color(0xff1F1F55),
             ),
             onPressed: () {},
             child: const Text(
@@ -167,7 +169,7 @@ Widget optionPopup() {
           width: 200,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xff1F1F55),
+              backgroundColor: const Color(0xff1F1F55),
             ),
             onPressed: () {},
             child: const Text(
@@ -181,12 +183,12 @@ Widget optionPopup() {
           width: 200,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xff1F1F55),
+              backgroundColor: const Color(0xff1F1F55),
             ),
             onPressed: () {},
             child: const Text(
               "Delete",
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18),
             ),
           ),
         ),
@@ -202,7 +204,7 @@ class MenuDrawer extends StatelessWidget {
   final name = "Rohith";
   final email = "aorohith@gmail.com";
 
-  MenuDrawer({Key? key}) : super(key: key);
+  const MenuDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -265,11 +267,12 @@ class MenuDrawer extends StatelessWidget {
                     height: 30,
                   ),
                   buildMenuItem(
-                      text: "About us",
-                      icon: Icons.info,
-                      onClicked: () {
-                        selectedItem(context, 3);
-                      }),
+                    text: "About us",
+                    icon: Icons.info,
+                    onClicked: () {
+                      selectedItem(context, 3);
+                    },
+                  ),
                 ],
               ),
             )
@@ -283,8 +286,8 @@ class MenuDrawer extends StatelessWidget {
       {required String text,
       required IconData icon,
       required VoidCallback onClicked}) {
-    final color = Colors.white;
-    final hoverColor = Colors.white70;
+    const color = Colors.white;
+    const hoverColor = Colors.white70;
     return ListTile(
       leading: Icon(
         icon,
@@ -293,7 +296,7 @@ class MenuDrawer extends StatelessWidget {
       ),
       title: Text(
         text,
-        style: TextStyle(color: color, fontSize: 18),
+        style: const TextStyle(color: color, fontSize: 18),
       ),
       hoverColor: hoverColor,
       onTap: onClicked,
@@ -347,12 +350,12 @@ class MenuDrawer extends StatelessWidget {
             .push(MaterialPageRoute(builder: (context) => const ShareScreen()));
         break;
       case 1:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const FeedbackScreen()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const FeedbackScreen()));
         break;
       case 2:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const ContactScreen()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const ContactScreen()));
         break;
       case 3:
         Navigator.of(context)

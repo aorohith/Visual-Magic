@@ -5,8 +5,10 @@ import 'dart:math';
 import 'package:visual_magic/VideoPlayer/video_player.dart';
 
 class RecentScreen extends StatefulWidget {
+  const RecentScreen({Key? key}) : super(key: key);
+
   @override
-  _RecentScreenState createState() => _RecentScreenState();
+  State<RecentScreen> createState() => _RecentScreenState();
 }
 
 class _RecentScreenState extends State<RecentScreen> {
@@ -28,15 +30,15 @@ class _RecentScreenState extends State<RecentScreen> {
     );
 
     return Scaffold(
-      drawer: MenuDrawer(),
-      floatingActionButton: PlayButton(context),
-      backgroundColor: Color(0xff060625),
+      drawer: const MenuDrawer(),
+      floatingActionButton: playButton(context),
+      backgroundColor: const Color(0xff060625),
       appBar: AppBar(
-        title: Text("Recent"),
-        actions: [
+        title: const Text("Recent"),
+        actions: const [
           Search(), //Search Refactor
         ],
-        backgroundColor: Color(0xff1f1f55),
+        backgroundColor: const Color(0xff1f1f55),
       ),
       body: Center(
         child: Stack(
@@ -70,7 +72,7 @@ class _RecentScreenState extends State<RecentScreen> {
                         width: width * .67,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: Color(0xff1f1f55),
+                          color: const Color(0xff1f1f55),
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
@@ -79,18 +81,21 @@ class _RecentScreenState extends State<RecentScreen> {
                           ],
                         ),
                         child: GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => VideoPlay()));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const VideoPlay()));
                           },
-                          child: Container(
+                          child: SizedBox(
                             child: ListView(
                               shrinkWrap: true,
                               padding: const EdgeInsets.all(20.0),
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
-                                Text(
+                                const Text(
                                   "Name of the video",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -99,12 +104,12 @@ class _RecentScreenState extends State<RecentScreen> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Image.asset("assets/images/download.jpeg"),
-                                SizedBox(height: 10),
-                                Text(
+                                const SizedBox(height: 10),
+                                const Text(
                                   "1 minutes ago",
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
@@ -126,12 +131,12 @@ class _RecentScreenState extends State<RecentScreen> {
             ),
             Positioned.fill(
               child: PageView.builder(
-                physics: BouncingScrollPhysics(
+                physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
                 itemCount: 11,
                 controller: pageController,
                 itemBuilder: (context, index) {
-                  return SizedBox();
+                  return const SizedBox();
                 },
               ),
             ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-Widget favouritePopup() {
+Widget favoritePopup() {
   return Container(
     height: 200,
     width: 250,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(20),
-      color: Color(0xff060625),
+      color: const Color(0xff060625),
     ),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -16,11 +16,11 @@ Widget favouritePopup() {
           width: 200,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Color(0xff1F1F55),
+              backgroundColor: const Color(0xff1F1F55),
             ),
             onPressed: () {},
-            child: Text(
-              "Remove from Favourite",
+            child: const Text(
+              "Remove from Favorite",
               style: TextStyle(fontSize: 18),
             ),
           ),
@@ -30,10 +30,10 @@ Widget favouritePopup() {
           width: 200,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Color(0xff1F1F55),
+              backgroundColor: const Color(0xff1F1F55),
             ),
             onPressed: () {},
-            child: Text(
+            child: const Text(
               "Add to Watch Later",
               style: TextStyle(fontSize: 18),
             ),
@@ -44,10 +44,10 @@ Widget favouritePopup() {
           width: 200,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Color(0xff1F1F55),
+              backgroundColor: const Color(0xff1F1F55),
             ),
             onPressed: () {},
-            child: Text(
+            child: const Text(
               "Rename",
               style: TextStyle(fontSize: 18),
             ),
@@ -58,10 +58,10 @@ Widget favouritePopup() {
           width: 200,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Color(0xff1F1F55),
+              backgroundColor: const Color(0xff1F1F55),
             ),
             onPressed: () {},
-            child: Text(
+            child: const Text(
               "Delete",
               style: TextStyle(fontSize: 18),
             ),

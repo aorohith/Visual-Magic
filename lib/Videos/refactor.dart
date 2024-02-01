@@ -5,7 +5,7 @@ import 'package:visual_magic/main/showcase_inherited.dart';
 import 'package:visual_magic/VideoPlayer/video_player.dart';
 import 'package:visual_magic/db/functions.dart';
 
-//List tile for video listview builder
+//List tile for video list view builder
 
 Widget getListView(
     {required index, required context, required videosWithIndex}) {
@@ -25,7 +25,7 @@ Widget getListView(
           context: context,
           builder: (ctx) {
             return AlertDialog(
-              backgroundColor: Color(0xf060625),
+              backgroundColor: const Color(0xff060625),
               content: optionPopup(),
             );
           });
@@ -33,9 +33,9 @@ Widget getListView(
     leading: Image.asset("assets/images/download.jpeg"),
     title: Text(
       videosWithIndex[index].title,
-      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
     ),
-    subtitle: Text(
+    subtitle: const Text(
       "10 Videos",
       style: TextStyle(color: Colors.white),
     ),
@@ -43,28 +43,29 @@ Widget getListView(
         ? Showcase(
             targetShapeBorder: const CircleBorder(),
             tooltipBackgroundColor: Colors.indigo,
-            descTextStyle: TextStyle(
+            descTextStyle: const TextStyle(
               fontWeight: FontWeight.w500,
               color: Colors.white,
               fontSize: 16,
             ),
             key: KeysToBeInherited.of(context).key4,
+            description: "Add to Favorites Here",
             child: Favorites(),
-            description: "Add to Favorites Here")
+          )
         : Favorites(),
   );
 }
 
-//Listtile ends here
+//List tile ends here
 
-class sortDropdown extends StatefulWidget {
-  const sortDropdown({Key? key}) : super(key: key);
+class SortDropdown extends StatefulWidget {
+  const SortDropdown({Key? key}) : super(key: key);
 
   @override
-  State<sortDropdown> createState() => _sortDropdownState();
+  State<SortDropdown> createState() => _SortDropdownState();
 }
 
-class _sortDropdownState extends State<sortDropdown> {
+class _SortDropdownState extends State<SortDropdown> {
   String dropdownValue = 'A to Z';
 
   @override

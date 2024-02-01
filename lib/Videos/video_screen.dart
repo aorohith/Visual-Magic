@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -14,78 +16,72 @@ class VideosScreen extends StatefulWidget {
 
 class _VideosScreenState extends State<VideosScreen> {
   @override
-  void initState() {
-    print(fetchedVideosWithInfo.value[1]);
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    double _w = MediaQuery.of(context).size.width;
-    bool isPressed = true;
-    bool isPressed2 = true;
-    bool isHighlighted = true;
+    double w = MediaQuery.of(context).size.width;
+    // bool isPressed = true;
+    // bool isPressed2 = true;
+    // bool isHighlighted = true;
     return Scaffold(
-      drawer: MenuDrawer(),
-      floatingActionButton: PlayButton(context),
-      backgroundColor: Color(0xff060625),
+      drawer: const MenuDrawer(),
+      floatingActionButton: playButton(context),
+      backgroundColor: const Color(0xff060625),
       appBar: AppBar(
-        title: Text("All Videos"),
+        title: const Text("All Videos"),
         actions: [
-          Search(),
+          const Search(),
           Showcase(
-              tooltipBackgroundColor: Colors.indigo,
-              descTextStyle: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-                fontSize: 16,
-              ),
-              key: KeysToBeInherited.of(context).key2,
-              child: sortDropdown(),
-              description: "Sort your videos here"),
+            tooltipBackgroundColor: Colors.indigo,
+            descTextStyle: const TextStyle(
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+              fontSize: 16,
+            ),
+            key: KeysToBeInherited.of(context).key2,
+            description: "Sort your videos here",
+            child: const SortDropdown(),
+          ),
           IconButton(
             onPressed: () {
-              ShowCaseWidget.of(context)!.startShowCase([
+              ShowCaseWidget.of(context).startShowCase([
                 KeysToBeInherited.of(context).key1,
                 KeysToBeInherited.of(context).key2,
                 KeysToBeInherited.of(context).key3,
                 KeysToBeInherited.of(context).key4,
               ]);
             },
-            icon: Icon(Icons.help_outline_outlined),
+            icon: const Icon(Icons.help_outline_outlined),
           ),
         ],
-        backgroundColor: Color(0xff2C2C6D),
+        backgroundColor: const Color(0xff2C2C6D),
       ),
       body: AnimationLimiter(
         child: ValueListenableBuilder(
             valueListenable: fetchedVideosWithInfo,
             builder: (BuildContext ctx, List<dynamic> videosWithIndex,
                 Widget? child) {
-              print(videosWithIndex.length);
+              log(videosWithIndex.length.toString());
               return ListView.builder(
-                padding: EdgeInsets.all(_w / 30),
-                physics: BouncingScrollPhysics(
+                padding: EdgeInsets.all(w / 30),
+                physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
                 itemCount: videosWithIndex.length,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
-                    delay: Duration(milliseconds: 100),
+                    delay: const Duration(milliseconds: 100),
                     child: SlideAnimation(
-                      duration: Duration(milliseconds: 2500),
+                      duration: const Duration(milliseconds: 2500),
                       curve: Curves.fastLinearToSlowEaseIn,
                       verticalOffset: -250,
                       child: ScaleAnimation(
-                        duration: Duration(milliseconds: 1500),
+                        duration: const Duration(milliseconds: 1500),
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: Container(
-                          margin: EdgeInsets.only(bottom: _w / 20),
-                          height: _w / 4,
+                          margin: EdgeInsets.only(bottom: w / 20),
+                          height: w / 4,
                           decoration: BoxDecoration(
-                            color: Color(0xff1f1f55),
-                            borderRadius: BorderRadius.all(
+                            color: const Color(0xff1f1f55),
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(20),
                             ),
                             boxShadow: [
@@ -101,19 +97,19 @@ class _VideosScreenState extends State<VideosScreen> {
                                 ? Showcase(
                                     targetShapeBorder: const CircleBorder(),
                                     tooltipBackgroundColor: Colors.indigo,
-                                    descTextStyle: TextStyle(
+                                    descTextStyle: const TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
                                     key: KeysToBeInherited.of(context).key3,
+                                    description:
+                                        "Long Press to view the more info",
                                     child: getListView(
                                       index: index,
                                       context: context,
                                       videosWithIndex: videosWithIndex,
-                                    ),
-                                    description:
-                                        "Long Press to view the more info")
+                                    ))
                                 : getListView(
                                     index: index,
                                     context: context,
