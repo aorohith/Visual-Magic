@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:visual_magic/Main/main_refactor.dart';
+import 'package:visual_magic/main/main_refactor.dart';
 import 'package:visual_magic/VideoPlayer/video_player.dart';
 import 'package:visual_magic/db/functions.dart';
 
@@ -25,9 +25,9 @@ class _FolderVideosState extends State<FolderVideos> {
   @override
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
-    bool isPressed = true;
-    bool isPressed2 = true;
-    bool isHighlighted = true;
+    // bool isPressed = true;
+    // bool isPressed2 = true;
+    // bool isHighlighted = true;
     return Scaffold(
       drawer: MenuDrawer(),
       floatingActionButton: PlayButton(context),
@@ -108,7 +108,7 @@ class _FolderVideosState extends State<FolderVideos> {
                                 "10 Videos",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              trailing: Favourites(),
+                              trailing: Favorites(),
                             ),
                           ),
                         ),

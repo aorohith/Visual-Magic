@@ -7,21 +7,22 @@ class KeysToBeInherited extends InheritedWidget {
   final GlobalKey key4;
   // final GlobalKey key5;
 
-  KeysToBeInherited({
+  const KeysToBeInherited({
+    Key? key,
     required Widget child,
     required this.key1,
     required this.key2,
     required this.key3,
     required this.key4,
     // required this.key5,
-  }) : super(child: child);
+  }) : super(key: key, child: child);
 
   static KeysToBeInherited of(BuildContext context) {
-    final KeysToBeInherited? result = context.dependOnInheritedWidgetOfExactType<KeysToBeInherited>();
+    final KeysToBeInherited? result =
+        context.dependOnInheritedWidgetOfExactType<KeysToBeInherited>();
     assert(result != null);
     return result!;
   }
-  
 
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) {

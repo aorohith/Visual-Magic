@@ -1,47 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:visual_magic/Main/main_refactor.dart';
-import 'package:visual_magic/FavouriteScreen/refactor.dart';
+import 'package:visual_magic/main/main_refactor.dart';
+import 'package:visual_magic/favorites_screen/refactor.dart';
 import 'package:visual_magic/VideoPlayer/video_player.dart';
 
-class FavouritesScreen extends StatelessWidget {
+class FavoritesScreen extends StatelessWidget {
+  const FavoritesScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    double _w = MediaQuery.of(context).size.width;
+    double w = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: MenuDrawer(),
       floatingActionButton: PlayButton(context),
-      backgroundColor: Color(0xff060625),
+      backgroundColor: const Color(0xff060625),
       appBar: AppBar(
-        title: Text("Favourites"),
+        title: const Text("Favorites"),
         actions: [
           Search(),
         ],
-        backgroundColor: Color(0xff2C2C6D),
+        backgroundColor: const Color(0xff2C2C6D),
       ),
       body: AnimationLimiter(
         child: ListView.builder(
-          padding: EdgeInsets.all(_w / 30),
+          padding: EdgeInsets.all(w / 30),
           physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           itemCount: 20,
           itemBuilder: (BuildContext context, int index) {
             return AnimationConfiguration.staggeredList(
               position: index,
-              delay: Duration(milliseconds: 100),
+              delay: const Duration(milliseconds: 100),
               child: SlideAnimation(
-                duration: Duration(milliseconds: 2500),
+                duration: const Duration(milliseconds: 2500),
                 curve: Curves.fastLinearToSlowEaseIn,
                 verticalOffset: -250,
                 child: ScaleAnimation(
-                  duration: Duration(milliseconds: 1500),
+                  duration: const Duration(milliseconds: 1500),
                   curve: Curves.fastLinearToSlowEaseIn,
                   child: Container(
-                    margin: EdgeInsets.only(bottom: _w / 20),
-                    height: _w / 4,
+                    margin: EdgeInsets.only(bottom: w / 20),
+                    height: w / 4,
                     decoration: BoxDecoration(
-                      color: Color(0xff1f1f55),
-                      borderRadius: BorderRadius.all(
+                      color: const Color(0xff1f1f55),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(20),
                       ),
                       boxShadow: [
@@ -55,15 +57,15 @@ class FavouritesScreen extends StatelessWidget {
                     child: Center(
                       child: ListTile(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VideoPlay()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const VideoPlay()));
                         },
                         leading: Image.asset("assets/images/download.jpeg"),
-                        title: Text(
+                        title: const Text(
                           "Camera",
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
-                        subtitle: Text(
+                        subtitle: const Text(
                           "10 Videos",
                           style: TextStyle(color: Colors.white),
                         ),
@@ -73,12 +75,12 @@ class FavouritesScreen extends StatelessWidget {
                               context: context,
                               builder: (ctx) {
                                 return AlertDialog(
-                                  backgroundColor: Color(0xf060625),
+                                  backgroundColor: const Color(0xf060625),
                                   content: favouritePopup(),
                                 );
                               });
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.more_vert,
                               color: Colors.white,
                             )),

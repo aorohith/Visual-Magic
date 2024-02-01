@@ -1,15 +1,15 @@
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
-import 'package:visual_magic/Main/showcase_inheritted.dart';
-import 'package:visual_magic/MenuDrawer/about_screen.dart';
-import 'package:visual_magic/MenuDrawer/contact_screen.dart';
-import 'package:visual_magic/MenuDrawer/feedback_screen.dart';
-import 'package:visual_magic/MenuDrawer/share_page.dart';
-import 'package:visual_magic/MenuDrawer/user.dart';
+import 'package:visual_magic/main/showcase_inherited.dart';
+import 'package:visual_magic/menu_drawer/about_screen.dart';
+import 'package:visual_magic/menu_drawer/contact_screen.dart';
+import 'package:visual_magic/menu_drawer/feedback_screen.dart';
+import 'package:visual_magic/menu_drawer/share_page.dart';
+import 'package:visual_magic/menu_drawer/user.dart';
 import 'package:visual_magic/VideoPlayer/video_player.dart';
 
-//#################...Flosting Video play Button..#############
+//#################...Floating Video play Button..#############
 
 Widget PlayButton(context) {
   return FloatingActionButton(
@@ -17,7 +17,7 @@ Widget PlayButton(context) {
     child: IconButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => VideoPlay()));
+            context, MaterialPageRoute(builder: (context) => const VideoPlay()));
       },
       icon: const Icon(Icons.play_arrow, size: 30, color: Colors.white),
     ),
@@ -43,18 +43,18 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
     super.initState();
     animController = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
-    final curvedAnimation = CurvedAnimation(
-      parent: animController!,
-      curve: Curves.easeOutExpo,
-    );
+    // final curvedAnimation = CurvedAnimation(
+    //   parent: animController!,
+    //   curve: Curves.easeOutExpo,
+    // );
   }
 
   Widget build(BuildContext context) {
     TextEditingController textController = TextEditingController();
     return Showcase(
-      shapeBorder: const CircleBorder(),
-      showcaseBackgroundColor: Colors.indigo,
-      descTextStyle: TextStyle(
+      targetShapeBorder: const CircleBorder(),
+      tooltipBackgroundColor: Colors.indigo,
+      descTextStyle: const TextStyle(
         fontWeight: FontWeight.w500,
         color: Colors.white,
         fontSize: 16,
@@ -63,6 +63,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
       description: "You can Search here",
       child: AnimSearchBar(
         //search dependency
+        onSubmitted: (data) {},
         width: 150,
         textController: textController,
         onSuffixTap: () {
@@ -75,20 +76,19 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
   }
 }
 
-
 //###################...Favourites button Refactoring...########################
 
-class Favourites extends StatefulWidget {
+class Favorites extends StatefulWidget {
   bool isHighlighted = true;
   bool isPressed = true;
   bool isPressed2 = true;
-  Favourites({Key? key}) : super(key: key);
+  Favorites({Key? key}) : super(key: key);
 
   @override
-  State<Favourites> createState() => _FavouritesState();
+  State<Favorites> createState() => _FavoritesState();
 }
 
-class _FavouritesState extends State<Favourites> {
+class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -344,19 +344,19 @@ class MenuDrawer extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ShareScreen()));
+            .push(MaterialPageRoute(builder: (context) => const ShareScreen()));
         break;
       case 1:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => FeedbackScreen()));
+            .push(MaterialPageRoute(builder: (context) => const FeedbackScreen()));
         break;
       case 2:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ContactScreen()));
+            .push(MaterialPageRoute(builder: (context) => const ContactScreen()));
         break;
       case 3:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => AboutScreen()));
+            .push(MaterialPageRoute(builder: (context) => const AboutScreen()));
         break;
     }
   }

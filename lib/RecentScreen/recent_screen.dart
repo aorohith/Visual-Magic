@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:visual_magic/Main/main_refactor.dart';
+import 'package:visual_magic/main/main_refactor.dart';
 import 'dart:math';
 
 import 'package:visual_magic/VideoPlayer/video_player.dart';

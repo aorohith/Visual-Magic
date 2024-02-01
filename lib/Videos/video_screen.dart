@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:showcaseview/showcaseview.dart';
-import 'package:visual_magic/Main/main_refactor.dart';
-import 'package:visual_magic/Main/showcase_inheritted.dart';
-import 'package:visual_magic/Videos/refactor.dart';
+import 'package:visual_magic/main/main_refactor.dart';
+import 'package:visual_magic/main/showcase_inherited.dart';
+import 'package:visual_magic/videos/refactor.dart';
 import 'package:visual_magic/db/functions.dart';
 
 class VideosScreen extends StatefulWidget {
-  VideosScreen({Key? key}) : super(key: key);
+  const VideosScreen({Key? key}) : super(key: key);
   @override
   State<VideosScreen> createState() => _VideosScreenState();
 }
@@ -35,7 +35,7 @@ class _VideosScreenState extends State<VideosScreen> {
         actions: [
           Search(),
           Showcase(
-              showcaseBackgroundColor: Colors.indigo,
+              tooltipBackgroundColor: Colors.indigo,
               descTextStyle: TextStyle(
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
@@ -99,8 +99,8 @@ class _VideosScreenState extends State<VideosScreen> {
                           child: Center(
                             child: index == 0
                                 ? Showcase(
-                                    shapeBorder: const CircleBorder(),
-                                    showcaseBackgroundColor: Colors.indigo,
+                                    targetShapeBorder: const CircleBorder(),
+                                    tooltipBackgroundColor: Colors.indigo,
                                     descTextStyle: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.white,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:visual_magic/Main/splash_screen.dart';
+import 'package:visual_magic/main/splash_screen.dart';
 import 'package:visual_magic/db/Models/video_model.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   await Hive.initFlutter();
-  if(!Hive.isAdapterRegistered(VideoModelAdapter().typeId)){
+  if (!Hive.isAdapterRegistered(VideoModelAdapter().typeId)) {
     Hive.registerAdapter(VideoModelAdapter());
     Hive.registerAdapter(UserModelAdapter());
   }
@@ -20,17 +20,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: Size(2246, 1080),
+        designSize: const Size(2246, 1080),
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (_) {
+        builder: (context, _) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            useInheritedMediaQuery: true,
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: SplashScreen(),
+            home: const SplashScreen(),
           );
         });
   }

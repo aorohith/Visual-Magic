@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_video_info/flutter_video_info.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:visual_magic/FetchFiles/search_files.dart';
+import 'package:visual_magic/fetch_files/search_files.dart';
 import 'package:visual_magic/db/Models/video_model.dart';
 
 final videoInfo = FlutterVideoInfo(); //creating object of infoclass
@@ -29,7 +29,7 @@ onSuccess(List<String> data) {
 //first called from splash screen
 Future splashFetch() async {
   if (await _requestPermission(Permission.storage)) {
-    final videoDB = await Hive.openBox<VideoModel>('video_db');
+    // final videoDB = await Hive.openBox<VideoModel>('video_db');
     SearchFilesInStorage.searchInStorage([
       '.mp4',
       '.mkv',
@@ -86,7 +86,7 @@ getFolderVideos(String path) {
         splittedMatchedVideoPath[splitted.length].endsWith('.mkv')) {
       filteredFolderVideos.value.add(newPath);
     }
-    filteredFolderVideos.notifyListeners();
+    // filteredFolderVideos.notifyListeners();
   }
   // notify listeners if needed
 }
@@ -111,7 +111,7 @@ Future getVideoWithInfo() async {
 
     fetchedVideosWithInfo.value.add(info);
   }
-  fetchedVideosWithInfo.notifyListeners();
+  // fetchedVideosWithInfo.notifyListeners();
 }
 
 sortAlphabetical() {
@@ -120,28 +120,28 @@ sortAlphabetical() {
           b.title.toLowerCase(),
         );
   });
-  fetchedVideosWithInfo.notifyListeners();
+  // fetchedVideosWithInfo.notifyListeners();
 }
 
 sortByDuration() {
   fetchedVideosWithInfo.value.sort((a, b) {
     return a.duration.compareTo(b.duration);
   });
-  fetchedVideosWithInfo.notifyListeners();
+  // fetchedVideosWithInfo.notifyListeners();
 }
 
 sortBySize() {
   fetchedVideosWithInfo.value.sort((a, b) {
     return a.filesize.compareTo(b.filesize);
   });
-  fetchedVideosWithInfo.notifyListeners();
+  // fetchedVideosWithInfo.notifyListeners();
 }
 
 sortByDate() {
   fetchedVideosWithInfo.value.sort((a, b) {
     return a.date.compareTo(b.date);
   });
-  fetchedVideosWithInfo.notifyListeners();
+  // fetchedVideosWithInfo.notifyListeners();
 }
 
 Future<void> getFromDB() async {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:showcaseview/showcaseview.dart';
-import 'package:visual_magic/Main/bottom_nav.dart';
+import 'package:visual_magic/main/bottom_nav.dart';
 import 'package:visual_magic/db/Models/video_model.dart';
 import 'package:visual_magic/db/functions.dart';
 

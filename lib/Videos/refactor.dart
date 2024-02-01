@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
-import 'package:visual_magic/Main/main_refactor.dart';
-import 'package:visual_magic/Main/showcase_inheritted.dart';
+import 'package:visual_magic/main/main_refactor.dart';
+import 'package:visual_magic/main/showcase_inherited.dart';
 import 'package:visual_magic/VideoPlayer/video_player.dart';
 import 'package:visual_magic/db/functions.dart';
 
@@ -41,17 +41,17 @@ Widget getListView(
     ),
     trailing: index == 0
         ? Showcase(
-            shapeBorder: const CircleBorder(),
-            showcaseBackgroundColor: Colors.indigo,
+            targetShapeBorder: const CircleBorder(),
+            tooltipBackgroundColor: Colors.indigo,
             descTextStyle: TextStyle(
               fontWeight: FontWeight.w500,
               color: Colors.white,
               fontSize: 16,
             ),
             key: KeysToBeInherited.of(context).key4,
-            child: Favourites(),
-            description: "Add to Favourites Here")
-        : Favourites(),
+            child: Favorites(),
+            description: "Add to Favorites Here")
+        : Favorites(),
   );
 }
 

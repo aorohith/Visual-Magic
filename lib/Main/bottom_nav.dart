@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:visual_magic/FavouriteScreen/favourites_screen.dart';
-import 'package:visual_magic/HomeScreen/folders_screen.dart';
-import 'package:visual_magic/Main/showcase_inheritted.dart';
+import 'package:visual_magic/favorites_screen/favorites_screen.dart';
+import 'package:visual_magic/home_screen/folders_screen.dart';
+import 'package:visual_magic/main/showcase_inherited.dart';
 import 'package:visual_magic/RecentScreen/recent_screen.dart';
 import 'package:visual_magic/Videos/video_screen.dart';
-import 'package:visual_magic/db/functions.dart';
 
 var globalData;
 
@@ -29,7 +28,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     HomeScreen(),
     RecentScreen(),
     VideosScreen(),
-    FavouritesScreen(),
+    FavoritesScreen(),
   ];
 
 @override
